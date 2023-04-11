@@ -23,12 +23,12 @@ Route::get(
     }
 );
 
-// Route::get(
-//     '/about',
-//     function () {
-//         return Inertia::render('About');
-//     }
-// );
+Route::get(
+    '/top',
+    function () {
+        return Inertia::render('Top');
+    }
+);
 
 Route::get('/', function () {
     return Inertia::render('Welcome', [
