@@ -15,10 +15,20 @@ use Inertia\Inertia;
 | contains the "web" middleware group. Now create something great!
 |
 */
-Route::get('/inertia-test', function () {
-    return Inertia::render('InertiaTest');
+
+Route::get(
+    '/inertia-test',
+    function () {
+        return Inertia::render('InertiaTest');
     }
 );
+
+// Route::get(
+//     '/about',
+//     function () {
+//         return Inertia::render('About');
+//     }
+// );
 
 Route::get('/', function () {
     return Inertia::render('Welcome', [
@@ -39,4 +49,4 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php'; //auth.phpをマージ
