@@ -4,6 +4,7 @@ use App\Http\Controllers\ProfileController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
+use App\Http\Controllers\HomeController;
 
 /*
 |--------------------------------------------------------------------------
@@ -16,18 +17,10 @@ use Inertia\Inertia;
 |
 */
 
-Route::get(
-    '/inertia-test',
-    function () {
-        return Inertia::render('InertiaTest');
-    }
-);
 
 Route::get(
     '/top',
-    function () {
-        return Inertia::render('Top');
-    }
+    [HomeController::class, 'index']
 );
 
 Route::get('/', function () {
