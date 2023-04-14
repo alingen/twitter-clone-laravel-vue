@@ -17,6 +17,6 @@ class DatabaseSeeder extends Seeder
         // ]);
         \App\Models\Tweet::factory(50)->create();
 
-        \App\Models\User::factory(5)->create(['user_id' => $this->user->id]);
+        \App\Models\User::factory(5)->create();
     }
 }

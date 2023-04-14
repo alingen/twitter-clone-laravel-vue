@@ -17,7 +17,9 @@ return new class extends Migration
             $table->string('year')->nullable(false);
             $table->string('month')->nullable(false);
             $table->string('day')->nullable(false);
-            $table->string('phone');
+            $table->string('phoneNumber')->default("");
+            $table->string('place')->default("");
+            $table->string('website')->default("");
         });
     }
 
@@ -32,7 +34,7 @@ return new class extends Migration
             $table->dropColumn('year');
             $table->dropColumn('month');
             $table->dropColumn('day');
-            $table->dropColumn('phone');
+            $table->dropColumn('phoneNumber');
         });
     }
 };

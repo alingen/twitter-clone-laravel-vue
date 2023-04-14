@@ -41,7 +41,6 @@ class SocialLoginController extends Controller
             'year' => '1990',
             'month' => '1',
             'day' => '1',
-            'phone' => '000000000000'
 
         ]);
 

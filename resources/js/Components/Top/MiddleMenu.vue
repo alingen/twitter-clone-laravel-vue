@@ -21,11 +21,12 @@
     <!--middle creat tweet-->
     <div class="flex">
         <div class="m-2 w-10 py-1">
-            <img
-                class="inline-block h-10 w-10 rounded-full"
-                src="https://pbs.twimg.com/profile_images/1121328878142853120/e-rpjoJi_bigger.png"
-                alt=""
-            />
+            <a href="/user"
+                ><img
+                    class="inline-block h-10 w-10 rounded-full"
+                    src="https://pbs.twimg.com/profile_images/1121328878142853120/e-rpjoJi_bigger.png"
+                    alt=""
+            /></a>
         </div>
         <div class="flex-1 px-2 pt-2 mt-2">
             <textarea

@@ -13,8 +13,8 @@
         </svg>
 
         <a
-            href="#"
-            class="group flex items-center px-2 py-2 text-base leading-6 font-semibold rounded-full hover:bg-gray-100"
+            href="/top"
+            class="group flex items-center px-2 py-2 text-base leading-6 rounded-full hover:bg-gray-100"
         >
             <svg
                 class="mr-4 h-6 w-6"
@@ -33,7 +33,7 @@
         </a>
         <a
             href="#"
-            class="mt-1 group flex items-center px-2 py-2 text-base leading-6 font-semibold rounded-full hover:bg-gray-100"
+            class="mt-1 group flex items-center px-2 py-2 text-base leading-6 rounded-full hover:bg-gray-100"
         >
             <svg
                 class="mr-4 h-6 w-6"
@@ -126,7 +126,7 @@
             Twitter Blue
         </a>
         <a
-            href="#"
+            href="/user"
             class="mt-1 group flex items-center px-2 py-2 text-base leading-6 font-medium rounded-full hover:bg-gray-100"
         >
             <svg
