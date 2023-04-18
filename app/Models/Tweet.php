@@ -11,5 +11,12 @@ class Tweet extends Model
 
     protected $fillable = [
         'text',
+        'user_id',
+        'image'
     ];
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 }

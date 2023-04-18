@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\TweetController;
 
 /*
 |--------------------------------------------------------------------------
@@ -18,6 +19,8 @@ use App\Http\Controllers\UserController;
 |
 */
 
+Route::resource('/tweets', 'App\Http\Controllers\TweetController');
+
 Route::get(
     '/user',
     [UserController::class, 'show']
@@ -26,7 +29,7 @@ Route::get(
 Route::get(
     '/top',
     [HomeController::class, 'index']
-);
+)->name('top');
 
 Route::get('/', function () {
     return Inertia::render('Welcome', [

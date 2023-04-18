@@ -32,6 +32,11 @@ defineProps({ user: Object, tweet: Object });
             {{ tweet.text }}
         </p>
 
+        <img
+            v-if="tweet.image"
+            class="block w-32 h-32 bg-cover bg-no-repeat bg-center"
+            :src="'/storage/images/' + tweet.image"
+        />
         <div class="flex">
             <div class="w-full">
                 <div class="flex items-center">
