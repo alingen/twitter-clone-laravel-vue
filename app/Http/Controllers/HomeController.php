@@ -26,6 +26,6 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return Inertia::render('Top', ['users' => User::all(), 'tweets' => Tweet::all()]);
+        return Inertia::render('Top', ['users' => User::all(), 'tweets' => Tweet::orderBy('created_at', 'desc')->get()]);
     }
 }

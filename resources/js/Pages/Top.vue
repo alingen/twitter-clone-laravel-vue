@@ -4,6 +4,7 @@ import Tweet from "@/Components/Tweet.vue";
 import LeftMenuBar from "@/Components/Top/LeftMenuBar.vue";
 import RightMenuBar from "@/Components/Top/RightMenuBar.vue";
 import MiddleMenu from "@/Components/Top/MiddleMenu.vue";
+
 defineProps({ users: Array, tweets: Array });
 </script>
 
@@ -19,6 +20,7 @@ defineProps({ users: Array, tweets: Array });
 
             <div class="w-3/5 border border-gray-100 h-auto border-t-0">
                 <!--middle wall-->
+
                 <MiddleMenu />
 
                 <tr v-for="tweet in tweets" :key="tweet.id">
@@ -34,7 +36,7 @@ defineProps({ users: Array, tweets: Array });
             </div>
 
             <div class="w-2/5 h-12">
-                <RightMenuBar />
+                <!-- <RightMenuBar /> -->
             </div>
         </div>
     </div>
