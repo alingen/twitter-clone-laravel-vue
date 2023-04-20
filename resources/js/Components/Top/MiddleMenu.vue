@@ -1,6 +1,7 @@
 <script setup>
 import { ref } from "vue";
 import { useForm } from "@Inertiajs/vue3";
+defineProps({ user: Object });
 
 const form = useForm({
     text: null,
@@ -20,7 +21,6 @@ const updateFilePreview = () => {
     const reader = new FileReader();
     reader.onload = (e) => {
         photoPreview.value = e.target.result;
-        console.log(e.target);
     };
     reader.readAsDataURL(file);
 };
@@ -29,7 +29,6 @@ const submit = () => {
     if (fileInput.value) {
         form.image = fileInput.value.files[0];
     }
-    console.log(form.image);
 
     form.post("/tweets", {
         preserveScroll: true,
@@ -72,7 +71,7 @@ const submit = () => {
                 <a href="/user"
                     ><img
                         class="inline-block h-10 w-10 rounded-full"
-                        src="https://pbs.twimg.com/profile_images/1121328878142853120/e-rpjoJi_bigger.png"
+                        :src="'/storage/avatars/' + user.avatar"
                         alt=""
                 /></a>
             </div>

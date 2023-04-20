@@ -17,6 +17,7 @@ return new class extends Migration
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
+            $table->string('avatar')->default('twittericon13.jpeg');
             $table->rememberToken();
             $table->timestamps();
         });

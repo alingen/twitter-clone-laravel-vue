@@ -9,8 +9,7 @@ defineProps({ user: Object, tweet: Object });
                 <div>
                     <img
                         class="inline-block h-10 w-10 rounded-full"
-                        src="https://pbs.twimg.com/profile_images/1121328878142853120/e-rpjoJi_bigger.png"
-                        alt=""
+                        :src="'/storage/avatars/' + user.avatar"
                     />
                 </div>
                 <div class="ml-3">

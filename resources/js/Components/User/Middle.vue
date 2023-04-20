@@ -18,7 +18,7 @@ const readmore = (text, length, suffix) => {
                 <div class="-mt-16 ml-2 w-32 mb-2">
                     <img
                         class="bg-white w-28 h-28 rounded-full border white"
-                        src="https://bluearchive.wikiru.jp/?plugin=attach&refer=%E3%83%8F%E3%83%AB%E3%83%8A&openfile=%E3%83%8F%E3%83%AB%E3%83%8A_0.png"
+                        :src="'/storage/avatars/' + users.avatar"
                         alt=""
                     />
                 </div>

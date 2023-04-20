@@ -3,6 +3,11 @@ import LeftMenuBar from "@/Components/Top/LeftMenuBar.vue";
 import RightMenuBar from "@/Components/Top/RightMenuBar.vue";
 import Middle from "@/Components/User/Middle.vue";
 import Tweet from "@/Components/Tweet.vue";
+import { computed } from "vue";
+import { usePage } from "@inertiajs/vue3";
+
+const page = usePage();
+const user = computed(() => page.props.auth.user);
 
 defineProps({ users: Array, tweets: Array });
 </script>
@@ -13,7 +18,7 @@ defineProps({ users: Array, tweets: Array });
         <div class="flex">
             <div class="w-2/5 black h-12 pl-32 py-4 h-auto">
                 <!--left menu-->
-                <LeftMenuBar />
+                <LeftMenuBar :user="user" />
             </div>
 
             <div
