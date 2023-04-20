@@ -4,6 +4,11 @@ import Tweet from "@/Components/Tweet.vue";
 import LeftMenuBar from "@/Components/Top/LeftMenuBar.vue";
 import RightMenuBar from "@/Components/Top/RightMenuBar.vue";
 import MiddleMenu from "@/Components/Top/MiddleMenu.vue";
+import { computed } from "vue";
+import { usePage } from "@inertiajs/vue3";
+
+const page = usePage();
+const user = computed(() => page.props.auth.user);
 
 defineProps({ users: Array, tweets: Array });
 </script>
@@ -15,13 +20,13 @@ defineProps({ users: Array, tweets: Array });
         <div class="flex">
             <div class="w-2/5 black h-12 pl-32 py-4 h-auto">
                 <!--left menu-->
-                <LeftMenuBar />
+                <LeftMenuBar :user="user" />
             </div>
 
             <div class="w-3/5 border border-gray-100 h-auto border-t-0">
                 <!--middle wall-->
 
-                <MiddleMenu />
+                <MiddleMenu :user="user" />
 
                 <tr v-for="tweet in tweets" :key="tweet.id">
                     <td>
