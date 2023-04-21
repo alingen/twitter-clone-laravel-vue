@@ -68,7 +68,7 @@ const submit = () => {
         <!--middle creat tweet-->
         <div class="flex">
             <div class="m-2 w-10 py-1">
-                <a href="/user"
+                <a :href="'/user/' + user.id"
                     ><img
                         class="inline-block h-10 w-10 rounded-full"
                         :src="'/storage/avatars/' + user.avatar"

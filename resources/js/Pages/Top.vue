@@ -20,7 +20,7 @@ defineProps({ users: Array, tweets: Array });
         <div class="flex">
             <div class="w-2/5 black h-12 pl-32 py-4 h-auto">
                 <!--left menu-->
-                <LeftMenuBar :user="user" />
+                <!-- <LeftMenuBar :user="user" /> -->
             </div>
 
             <div class="w-3/5 border border-gray-100 h-auto border-t-0">
