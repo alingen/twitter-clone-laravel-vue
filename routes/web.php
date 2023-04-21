@@ -21,9 +21,9 @@ use App\Http\Controllers\TweetController;
 
 Route::resource('/tweets', 'App\Http\Controllers\TweetController');
 
-Route::get(
+Route::resource(
     '/user',
-    [UserController::class, 'show']
+    'App\Http\Controllers\UserController'
 );
 
 Route::get(
