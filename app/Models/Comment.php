@@ -4,16 +4,15 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\HasMany;
 
-
-class Tweet extends Model
+class Comment extends Model
 {
     use HasFactory;
 
     protected $fillable = [
         'text',
         'user_id',
+        'tweet_id',
         'image'
     ];
 
@@ -21,8 +20,8 @@ class Tweet extends Model
     {
         return $this->belongsTo(User::class);
     }
-    public function comments(): HasMany
+    public function tweet()
     {
-        return $this->hasMany(Comment::class);
+        return $this->belongsTo(Tweet::class);
     }
 }

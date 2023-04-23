@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Comment;
 use Illuminate\Http\Request;
 use App\Models\Tweet;
+use Inertia\Inertia;
+use App\Models\User;
 
 class TweetController extends Controller
 {
@@ -48,9 +51,9 @@ class TweetController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(Tweet $tweet)
     {
-        //
+        return Inertia::render('TweetDetail', ['tweet' => $tweet, 'users' => User::all(), 'comments' => Comment::where('tweet_id', $tweet->id)->orderBy('created_at', 'desc')->get()]);
     }
 
     /**

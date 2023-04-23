@@ -1,5 +1,5 @@
 <script setup>
-defineProps({ user: Object, tweet: Object });
+defineProps({ user: Object, tweet: Object, tweet_or_comment: String });
 </script>
 
 <template>
@@ -27,9 +27,18 @@ defineProps({ user: Object, tweet: Object });
         </a>
     </div>
     <div class="pl-16">
-        <p class="text-base width-auto font-medium text-black flex-shrink">
-            {{ tweet.text }}
-        </p>
+        <a
+            v-if="tweet_or_comment === 'tweet'"
+            :href="route('tweets.show', { tweet: tweet.id })"
+            ><p class="text-base width-auto font-medium text-black flex-shrink">
+                {{ tweet.text }}
+            </p></a
+        >
+        <a v-else-if="tweet_or_comment === 'comment'" href="#"
+            ><p class="text-base width-auto font-medium text-black flex-shrink">
+                {{ tweet.text }}
+            </p></a
+        >
 
         <img
             v-if="tweet.image"
