@@ -19,7 +19,9 @@ use App\Http\Controllers\TweetController;
 |
 */
 
-Route::resource('/tweets', 'App\Http\Controllers\TweetController');
+Route::resource('/comments', 'App\Http\Controllers\CommentController')->middleware('auth');;
+
+Route::resource('/tweets', 'App\Http\Controllers\TweetController', ['only' => ['store', 'show']]);
 
 Route::resource(
     '/user',

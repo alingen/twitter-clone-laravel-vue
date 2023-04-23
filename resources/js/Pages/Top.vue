@@ -35,6 +35,7 @@ defineProps({ users: Array, tweets: Array });
                             :user="
                                 users.find((user) => user.id === tweet.user_id)
                             "
+                            :tweet_or_comment="'tweet'"
                         />
                     </td>
                 </tr>
