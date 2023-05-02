@@ -1,5 +1,42 @@
 <script setup>
-defineProps({ user: Object, tweet: Object, tweet_or_comment: String });
+import { router } from "@inertiajs/vue3";
+import axios from "axios";
+import { onMounted, onUpdated, ref } from "vue";
+
+const props = defineProps({
+    user: Object,
+    tweet: Object,
+    tweet_or_comment: String,
+});
+
+const isLike = ref(false);
+
+onMounted(() => {
+    like_check();
+});
+
+async function like_check() {
+    const path = `/tweets/${props.tweet.id}/liked`;
+
+    try {
+        const res = await axios.get(path);
+        isLike.value = res.data === 1;
+    } catch (err) {
+        console.log(err);
+    }
+}
+
+const likeTweet = () => {
+    router.post(route("tweets.likes.store", { tweet: props.tweet.id }));
+    isLike.value = !isLike.value;
+};
+
+const deleteLike = () => {
+    router.delete(
+        route("tweets.likes.destroy", { tweet: props.tweet.id, like: 1 })
+    );
+    isLike.value = !isLike.value;
+};
 </script>
 
 <template>
@@ -90,9 +127,30 @@ defineProps({ user: Object, tweet: Object, tweet_or_comment: String });
                         </a>
                     </div>
 
+                    <!-- ハート -->
                     <div class="flex-1 text-center py-2 m-2">
-                        <a
-                            href="#"
+                        <button
+                            v-if="isLike === true"
+                            @click="deleteLike"
+                            class="w-12 mt-1 group flex items-center text-gray-500 px-3 py-2 text-base leading-6 font-medium rounded-full hover:bg-gray-200 hover:text-blue-300"
+                        >
+                            <svg
+                                class="stroke-red-300 fill-red-300 text-center h-7 w-6"
+                                fill="none"
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                                stroke-width="2"
+                                stroke="currentColor"
+                                viewBox="0 0 24 24"
+                            >
+                                <path
+                                    d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"
+                                ></path>
+                            </svg>
+                        </button>
+                        <button
+                            v-else
+                            @click="likeTweet"
                             class="w-12 mt-1 group flex items-center text-gray-500 px-3 py-2 text-base leading-6 font-medium rounded-full hover:bg-gray-200 hover:text-blue-300"
                         >
                             <svg
@@ -108,7 +166,7 @@ defineProps({ user: Object, tweet: Object, tweet_or_comment: String });
                                     d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"
                                 ></path>
                             </svg>
-                        </a>
+                        </button>
                     </div>
 
                     <div class="flex-1 text-center py-2 m-2">

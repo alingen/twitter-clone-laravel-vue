@@ -79,4 +79,10 @@ class TweetController extends Controller
     {
         //
     }
+
+    public function isLikedByCurrentUser(Tweet $tweet)
+    {
+        $isLiked = auth()->user()->liked($tweet);
+        return response()->json($isLiked ? 1 : 0);
+    }
 }
