@@ -8,6 +8,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\LikeController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\TweetController;
+use App\Http\Controllers\RetweetController;
 
 /*
 |--------------------------------------------------------------------------
@@ -53,6 +54,9 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
     Route::resource('tweets.likes', LikeController::class)->only(['store', 'destroy', 'delete']);
     Route::get('/tweets/{tweet}/liked', [TweetController::class, 'isLikedByCurrentUser']);
+    Route::resource('tweets.retweets', RetweetController::class)->only(['store', 'destroy', 'delete']);
+    Route::get('/tweets/{tweet}/retweetCheck', [TweetController::class, 'isRetweetByCurrentUser']);
+    Route::get('/tweets/{tweet}/findRetweetUser', [RetweetController::class, 'retweetUser']);
 });
 
 require __DIR__ . '/auth.php'; //auth.phpをマージ

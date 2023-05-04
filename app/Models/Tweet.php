@@ -29,4 +29,8 @@ class Tweet extends Model
     {
         return $this->morphMany(Like::class, 'likable');
     }
+    public function retweets()
+    {
+        return $this->morphMany(Retweet::class, 'retweetable');
+    }
 }

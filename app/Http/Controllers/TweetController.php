@@ -31,7 +31,7 @@ class TweetController extends Controller
      */
     public function store(Request $request)
     {
-
+        // dd($request);
         $validatedData = $request->validate([
             'text' => 'required|max:140',
             'image' => 'nullable|image|mimes:jpeg,png,jpg,svg|max:2048',
@@ -84,5 +84,10 @@ class TweetController extends Controller
     {
         $isLiked = auth()->user()->liked($tweet);
         return response()->json($isLiked ? 1 : 0);
+    }
+    public function isRetweetByCurrentUser(Tweet $tweet)
+    {
+        $isRetweet = auth()->user()->retweeted($tweet);
+        return response()->json($isRetweet ? 1 : 0);
     }
 }
