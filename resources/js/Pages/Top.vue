@@ -10,7 +10,7 @@ import { usePage } from "@inertiajs/vue3";
 const page = usePage();
 const user = computed(() => page.props.auth.user);
 
-defineProps({ users: Array, tweets: Array });
+defineProps({ users: Array, tweets: Array, retweets: Array });
 </script>
 
 <template>
@@ -28,17 +28,22 @@ defineProps({ users: Array, tweets: Array });
 
                 <MiddleMenu :user="user" />
 
-                <tr v-for="tweet in tweets" :key="tweet.id">
-                    <td>
-                        <Tweet
-                            :tweet="tweet"
-                            :user="
-                                users.find((user) => user.id === tweet.user_id)
-                            "
-                            :tweet_or_comment="'tweet'"
-                        />
-                    </td>
-                </tr>
+                <div v-for="retweet in retweets" :key="retweet.id">
+                    <tr v-for="tweet in tweets" :key="tweet.id">
+                        <td>
+                            <Tweet
+                                :tweet="tweet"
+                                :user="
+                                    users.find(
+                                        (user) => user.id === tweet.user_id
+                                    )
+                                "
+                                :retweet_user_name="retweet.user.name"
+                                :tweet_or_comment="'tweet'"
+                            />
+                        </td>
+                    </tr>
+                </div>
             </div>
 
             <div class="w-2/5 h-12">

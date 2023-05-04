@@ -66,9 +66,16 @@ class User extends Authenticatable implements MustVerifyEmail
     {
         return $this->hasMany(Like::class);
     }
-
     public function liked(Tweet $tweet)
     {
         return $this->likes()->where('likable_id', $tweet->id)->exists();
+    }
+    public function retweets()
+    {
+        return $this->hasMany(Retweet::class);
+    }
+    public function retweeted(Tweet $tweet)
+    {
+        return $this->retweets()->where('retweetable_id', $tweet->id)->exists();
     }
 }

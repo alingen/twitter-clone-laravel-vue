@@ -15,7 +15,7 @@ class DatabaseSeeder extends Seeder
         // $this->call([
         //     TweetSeeder::class
         // ]);
-        \App\Models\Tweet::factory(50)->create();
+        \App\Models\Tweet::factory(25)->create();
 
         \App\Models\User::factory(5)->create();
     }

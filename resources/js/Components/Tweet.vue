@@ -6,13 +6,17 @@ import { onMounted, onUpdated, ref } from "vue";
 const props = defineProps({
     user: Object,
     tweet: Object,
+    retweet_user_name: String,
     tweet_or_comment: String,
 });
 
 const isLike = ref(false);
+const isRetweet = ref(false);
 
 onMounted(() => {
     like_check();
+    retweet_check();
+    // findRetweetUser();
 });
 
 async function like_check() {
@@ -21,6 +25,17 @@ async function like_check() {
     try {
         const res = await axios.get(path);
         isLike.value = res.data === 1;
+    } catch (err) {
+        console.log(err);
+    }
+}
+
+async function retweet_check() {
+    const path = `/tweets/${props.tweet.id}/retweetCheck`;
+
+    try {
+        const res = await axios.get(path);
+        isRetweet.value = res.data === 1;
     } catch (err) {
         console.log(err);
     }
@@ -37,11 +52,51 @@ const deleteLike = () => {
     );
     isLike.value = !isLike.value;
 };
+
+const retweetTweet = () => {
+    //DBに登録
+    router.post(
+        route("tweets.retweets.store", {
+            tweet: props.tweet.id,
+        }),
+        { preserveScroll: true }
+    );
+    //マークを緑に
+    isRetweet.value = !isRetweet.value;
+};
+
+const deleteRetweet = () => {
+    router.delete(
+        route("tweets.retweets.destroy", {
+            tweet: props.tweet.id,
+            retweet: 2,
+        }),
+        { preserveScroll: true }
+    );
+    isRetweet.value = !isRetweet.value;
+};
 </script>
 
 <template>
     <div class="flex flex-shrink-0 p-4 pb-0">
         <a href="#" class="flex-shrink-0 group block">
+            <div v-if="tweet.retweet_user_id" class="flex mx-1.5">
+                <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke-width="1.5"
+                    stroke="currentColor"
+                    class="w-5 h-5"
+                >
+                    <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        d="M19.5 12c0-1.232-.046-2.453-.138-3.662a4.006 4.006 0 00-3.7-3.7 48.678 48.678 0 00-7.324 0 4.006 4.006 0 00-3.7 3.7c-.017.22-.032.441-.046.662M19.5 12l3-3m-3 3l-3-3m-12 3c0 1.232.046 2.453.138 3.662a4.006 4.006 0 003.7 3.7 48.656 48.656 0 007.324 0 4.006 4.006 0 003.7-3.7c.017-.22.032-.441.046-.662M4.5 12l3 3m-3-3l-3 3"
+                    />
+                </svg>
+                <p class="ml-2">{{ retweet_user_name }}さんがリツイート</p>
+            </div>
             <div class="flex items-center">
                 <div>
                     <img
@@ -106,9 +161,30 @@ const deleteLike = () => {
                         </a>
                     </div>
 
+                    <!-- リツイート -->
                     <div class="flex-1 text-center py-2 m-2">
-                        <a
-                            href="#"
+                        <button
+                            v-if="isRetweet === true"
+                            @click="deleteRetweet"
+                            class="w-12 mt-1 group flex items-center text-gray-500 px-3 py-2 text-base leading-6 font-medium rounded-full hover:bg-gray-200 hover:text-blue-300"
+                        >
+                            <svg
+                                class="text-center stroke-green-300 h-7 w-6"
+                                fill="none"
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                                stroke-width="2"
+                                stroke="currentColor"
+                                viewBox="0 0 24 24"
+                            >
+                                <path
+                                    d="M7 16V4m0 0L3 8m4-4l4 4m6 0v12m0 0l4-4m-4 4l-4-4"
+                                ></path>
+                            </svg>
+                        </button>
+                        <button
+                            v-if="isRetweet === false"
+                            @click="retweetTweet"
                             class="w-12 mt-1 group flex items-center text-gray-500 px-3 py-2 text-base leading-6 font-medium rounded-full hover:bg-gray-200 hover:text-blue-300"
                         >
                             <svg
@@ -124,7 +200,7 @@ const deleteLike = () => {
                                     d="M7 16V4m0 0L3 8m4-4l4 4m6 0v12m0 0l4-4m-4 4l-4-4"
                                 ></path>
                             </svg>
-                        </a>
+                        </button>
                     </div>
 
                     <!-- ハート -->

@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Inertia\Inertia;
 use App\Models\Tweet;
 use App\Models\User;
+use App\Models\Retweet;
 
 class HomeController extends Controller
 {
@@ -26,6 +27,16 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return Inertia::render('Top', ['users' => User::all(), 'tweets' => Tweet::orderBy('created_at', 'desc')->get()]);
+        $onlytweets = Tweet::select('retweets.*', 'retweets.user_id AS retweet_user_id', 'tweets.*', 'tweets.created_at AS sort_created_at')
+            ->leftjoin('retweets', 'tweets.id', '=', 'retweets.retweetable_type'); //あえて間違えてカラムをつくる
+        $retweets = Retweet::select('retweets.*', 'retweets.user_id AS retweet_user_id', 'tweets.*', 'retweets.created_at AS sort_created_at')
+            ->join('tweets', 'tweets.id', '=', 'retweets.retweetable_id');
+
+        $tweets = $onlytweets->unionAll($retweets)
+            ->orderBy('sort_created_at', 'desc')
+            ->get();
+
+        // dd($onlytweets);
+        return Inertia::render('Top', ['users' => User::all(), 'tweets' => $tweets, 'retweets' => Retweet::with('user')->get()]);
     }
 }

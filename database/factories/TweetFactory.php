@@ -22,7 +22,7 @@ class TweetFactory extends Factory
             'user_id' => function () {
                 return User::factory()->create()->id;
             },
-            'text' => fake()->realText(100)
+            'text' => fake()->realText(25)
         ];
     }
 }
