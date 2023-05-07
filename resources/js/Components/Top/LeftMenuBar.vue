@@ -54,7 +54,7 @@ defineProps({ user: Object });
             話題を検索
         </a>
         <a
-            href="#"
+            href="/info"
             class="mt-1 group flex items-center px-2 py-2 text-base leading-6 font-medium rounded-full hover:bg-gray-100"
         >
             <svg

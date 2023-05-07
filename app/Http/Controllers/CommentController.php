@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Contracts\Support\ValidatedData;
 use Illuminate\Http\Request;
+use App\Models\Tweet;
+use App\Models\User;
+use App\Notifications\TestNotification;
 use Inertia\Inertia;
 
 class CommentController extends Controller
@@ -29,6 +32,20 @@ class CommentController extends Controller
 
         $comment = auth()->user()->comments()->create($validatedData);
         $comment->save();
+
+        //通知登録
+        $content = (object)[
+            'user_id_from' => $comment->user_id,
+            'tweet_id' => $request->tweet_id,
+            'infomation_type' => 'Comment',
+            'infomation_id' => $comment->id
+        ];
+
+        $tweet = Tweet::with('user')->find($request->tweet_id);
+        $user = $tweet->user;
+        $user->notify(new TestNotification(
+            $content
+        ));
 
         return to_route('tweets.show', $request->tweet_id);
     }
