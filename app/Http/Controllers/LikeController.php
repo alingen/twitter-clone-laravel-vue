@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Tweet;
 use App\Notifications\TestNotification;
 use App\Models\User;
+use App\Models\Infomation;
 
 
 class LikeController extends Controller
@@ -22,13 +23,12 @@ class LikeController extends Controller
             render('top');
         }
 
-        // dd($tweet);
-        $content = (object)[
+        $content = Infomation::create([
             'user_id_from' => $like->user_id,
             'tweet_id' => $tweet->id,
             'infomation_type' => 'Like',
             'infomation_id' => $like->id
-        ];
+        ]);
 
         $user = User::find($tweet->user_id);
         $user->notify(new TestNotification(

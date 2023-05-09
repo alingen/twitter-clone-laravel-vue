@@ -16,7 +16,6 @@ const isRetweet = ref(false);
 onMounted(() => {
     like_check();
     retweet_check();
-    // findRetweetUser();
 });
 
 async function like_check() {

@@ -38,11 +38,6 @@ const submit = () => {
 </script>
 
 <template>
-    <!-- <form @submit.prevent="submit" enctype="multipart/form-data">
-        <input type="file" id="file" name="file" class="form-control" />
-
-        <button type="submit">アップロード</button> -->
-    <!-- </form> -->
     <form @submit.prevent="submit">
         <div>
             <div class="m-1">

@@ -1,4 +1,6 @@
-<script setup></script>
+<script setup>
+// const props = defineProps({ notification: Array });
+</script>
 
 <template>
     <div>
@@ -25,6 +27,4 @@
     </div>
 
     <hr class="border-gray-100" />
-
-    <div>通知１</div>
 </template>

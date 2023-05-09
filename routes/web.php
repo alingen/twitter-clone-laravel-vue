@@ -5,6 +5,7 @@ use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\InfomationController;
 use App\Http\Controllers\LikeController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\TweetController;
@@ -57,6 +58,7 @@ Route::middleware('auth')->group(function () {
     Route::resource('tweets.retweets', RetweetController::class)->only(['store', 'destroy', 'delete']);
     Route::get('/tweets/{tweet}/retweetCheck', [TweetController::class, 'isRetweetByCurrentUser']);
     Route::get('/tweets/{tweet}/findRetweetUser', [RetweetController::class, 'retweetUser']);
+    Route::get('/info', [InfomationController::class, 'index']);
 });
 
 require __DIR__ . '/auth.php'; //auth.phpをマージ
