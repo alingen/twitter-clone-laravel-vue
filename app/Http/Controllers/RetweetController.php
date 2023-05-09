@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Tweet;
 use App\Notifications\TestNotification;
 use App\Models\User;
+use App\Models\Infomation;
 
 class RetweetController extends Controller
 {
@@ -25,12 +26,12 @@ class RetweetController extends Controller
         $oldrow->retweet = true;
         $oldrow->save();
 
-        $content = (object)[
+        $content = Infomation::create([
             'user_id_from' => $retweet->user_id,
             'tweet_id' => $tweet->id,
             'infomation_type' => 'Retweet',
             'infomation_id' => $retweet->id
-        ];
+        ]);
 
         $user = User::find($tweet->user_id);
         $user->notify(new TestNotification(

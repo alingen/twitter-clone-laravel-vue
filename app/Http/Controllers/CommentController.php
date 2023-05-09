@@ -8,6 +8,7 @@ use App\Models\Tweet;
 use App\Models\User;
 use App\Notifications\TestNotification;
 use Inertia\Inertia;
+use App\Models\Infomation;
 
 class CommentController extends Controller
 {
@@ -34,12 +35,12 @@ class CommentController extends Controller
         $comment->save();
 
         //通知登録
-        $content = (object)[
+        $content = Infomation::create([
             'user_id_from' => $comment->user_id,
             'tweet_id' => $request->tweet_id,
             'infomation_type' => 'Comment',
             'infomation_id' => $comment->id
-        ];
+        ]);
 
         $tweet = Tweet::with('user')->find($request->tweet_id);
         $user = $tweet->user;
